@@ -1,0 +1,18 @@
+# Environment — never commit secrets
+backend/.env
+
+# Python virtualenv
+backend/.venv/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Runtime data (ChromaDB vector store)
+backend/data/
+
+# macOS
+.DS_Store
