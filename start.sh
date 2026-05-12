@@ -17,18 +17,12 @@ pip install -q -r requirements.txt
 
 if [ ! -f ".env" ]; then
   cp .env.example .env
-  echo ""
-  echo "  !! Created backend/.env — add your GROQ_API_KEY before continuing."
-  echo "     Get one free at https://console.groq.com"
-  echo ""
-  exit 0
 fi
 
-# Verify key is set
-source .env
-if [ -z "$GROQ_API_KEY" ] || [ "$GROQ_API_KEY" = "gsk_..." ]; then
-  echo "ERROR: Set GROQ_API_KEY in backend/.env (get one at https://console.groq.com)"
-  exit 1
+# Key can be left blank here — users can enter it on the app's home screen
+source .env 2>/dev/null || true
+if [ -z "$GROQ_API_KEY" ]; then
+  echo "  (No GROQ_API_KEY in backend/.env — enter it on the app's home screen)"
 fi
 
 uvicorn main:app --reload --port 8000 &
